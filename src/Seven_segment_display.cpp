@@ -4,6 +4,11 @@
 
 #include <Arduino.h>
 
+#define ONES(x) x % 10
+#define TENS(x) (x / 10) % 10
+#define HUNDREDS(x) (x / 100) % 10
+#define THOUSANDS(x) (x / 1000) % 10
+
 const uint8_t Seven_segment_display::m_seven_segment_digits[] = {
     ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE};
 

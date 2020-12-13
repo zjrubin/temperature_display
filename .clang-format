@@ -35,7 +35,7 @@ ColumnLimit: 80
 Cpp11BracedListStyle: true
 DerivePointerAlignment: false
 DisableFormat: false
-IncludeBlocks: Merge
+IncludeBlocks: Regroup
 IndentCaseLabels: false
 IndentPPDirectives: None
 IndentWidth: 4
@@ -51,7 +51,7 @@ PenaltyBreakFirstLessLess: 120
 PenaltyBreakString: 1000
 PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 60
-PointerAlignment: Right
+PointerAlignment: Left
 ReflowComments: true
 SortIncludes: true
 SpaceAfterCStyleCast: false

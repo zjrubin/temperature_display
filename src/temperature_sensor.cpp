@@ -15,7 +15,7 @@
 
 DHT g_dht{DHTPIN, DHTTYPE};
 
-void print_temperature(bool fahrenheit = false)
+void print_temperature(bool fahrenheit)
 {
     // Reading temperature or humidity takes about 250 milliseconds!
     // Sensor readings may also be up to 2 seconds 'old' (its a very slow

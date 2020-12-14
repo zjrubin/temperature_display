@@ -1,10 +1,13 @@
 {
     "editor.formatOnSave": true,
     "cSpell.words": [
+        "attiny",
         "c",
         "c wifi ssid",
         "debug",
         "debug serial printfln",
+        "dhtpin",
+        "dhttype",
         "eeprom",
         "printfln",
         "serial",

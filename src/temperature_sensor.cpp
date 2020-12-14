@@ -2,7 +2,15 @@
 
 #include "arduino_debug.h"
 
-#define DHTPIN 2       // Digital pin connected to the DHT sensor
+// Digital pin connected to the DHT sensor
+// On the attiny85, pin 5 is used as the reset pin, so it cannot be used.
+// On the nanoatmega328, pin 0 is used for RX, so it cannot be used.
+#if ENV == attiny85
+#define DHTPIN 0
+#else
+#define DHTPIN 5
+#endif
+
 #define DHTTYPE DHT22  // DHT 22  (AM2302), AM2321
 
 DHT g_dht{DHTPIN, DHTTYPE};

@@ -17,6 +17,8 @@ class Seven_segment_display {
         return s;
     }
 
+    void display_temperature(float temperature);
+
     void display_cycle();
 
   private:

@@ -23,5 +23,17 @@ void loop()
     Seven_segment_display::get_instance().display_cycle();
     delay(1000);
 
-    print_temperature(true);  // fahrenheit = true
+    float temp = g_dht.readTemperature(true);
+    if (isnan(temp)) {
+        debug_serial_println(F("Failed to read from DHT sensor!"));
+        return;
+    }
+
+    debug_serial_print(F("Temperature: "));
+    debug_serial_print(temp);
+    debug_serial_println(F("°F"));
+
+    Seven_segment_display::get_instance().display_temperature(temp);
+
+    // print_temperature(true);
 }

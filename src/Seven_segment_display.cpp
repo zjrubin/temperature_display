@@ -1,8 +1,10 @@
 #include "Seven_segment_display.h"
 
 #include "seven_segment_characters.h"
+#include "util.h"
 
 #include <Arduino.h>
+#include <math.h>
 
 #define ONES(x) x % 10
 #define TENS(x) (x / 10) % 10
@@ -10,7 +12,8 @@
 #define THOUSANDS(x) (x / 1000) % 10
 
 const uint8_t Seven_segment_display::m_seven_segment_digits[] = {
-    ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE};
+    ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, BLANK};
+#define BLANK_DIGIT (NUM_ELEMENTS(m_seven_segment_digits) - 1)
 
 const uint8_t Seven_segment_display::m_seven_segment_letters[] = {
     0x00,          0x00,     0x00,     0x00,     0x00,
@@ -39,9 +42,9 @@ const uint8_t Seven_segment_display::m_seven_segment_letters[] = {
     LETTER_s,      LETTER_t, LETTER_u, LETTER_v, LETTER_w,
     LETTER_x,      LETTER_y, LETTER_z};
 
-const int Seven_segment_display::m_clock_pin = 3;
-const int Seven_segment_display::m_latch_pin = 4;
-const int Seven_segment_display::m_data_pin = 5;
+const int Seven_segment_display::m_clock_pin = 2;
+const int Seven_segment_display::m_latch_pin = 3;
+const int Seven_segment_display::m_data_pin = 4;
 
 // Initialize starting value of the display
 uint8_t Seven_segment_display::m_display_digits[] = {8};
@@ -52,6 +55,24 @@ void Seven_segment_display::setup_seven_segment_display()
     pinMode(m_clock_pin, OUTPUT);
     pinMode(m_latch_pin, OUTPUT);
     pinMode(m_data_pin, OUTPUT);
+}
+
+void Seven_segment_display::display_temperature(float temperature)
+{
+    int rounded_temperature = static_cast<int>(round(temperature));
+
+    m_display_digits[0] = TENS(rounded_temperature);
+    show();
+    delay(1000);
+
+    // Briefly blank the display to indicate a transition to the ONES digit
+    m_display_digits[0] = BLANK_DIGIT;
+    show();
+    delay(50);
+
+    m_display_digits[0] = ONES(rounded_temperature);
+    show();
+    delay(1000);
 }
 
 void Seven_segment_display::display_cycle()
